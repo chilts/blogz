@@ -27,6 +27,14 @@ var debug    = require('debug')('blogz');
 
 // ----------------------------------------------------------------------------
 
+var defaults = {
+    title       : '',
+    description : '',
+    base        : '',
+    latestCount : 10,
+    indexCount  : 10,
+};
+
 var validExt = {
     md      : true,
     textile : true,
@@ -38,6 +46,16 @@ var validExt = {
 };
 
 function readBlogSync(opts) {
+    if ( !opts.domain ) {
+        throw new Error("Provide a domain");
+    }
+    if ( !opts.contentDir ) {
+        throw new Error("Provide a contentDir");
+    }
+
+    // set some defaults
+    opts = xtend({}, defaults, opts);
+
     // set up some vars we're going to use
     var post    = {};
     var posts   = [];
@@ -200,10 +218,7 @@ function readBlogSync(opts) {
     // set up an easy way to access the latest posts
     latest = reverse.slice(0, opts.latestCount);
 
-    // make the index pages
-    for ( var i = 0; i < posts.length; i += opts.indexCount ) {
-        pages.push(reverse.slice(i, i + opts.indexCount));
-    }
+    // ToDo: make the index pages ... !
 
     // make the archive
     posts.forEach(function(post) {
@@ -240,7 +255,7 @@ function readBlogSync(opts) {
         }
     };
 
-    rssData.channel.item = posts.map(function(post, i) {
+    rssData.channel.item = latest.map(function(post, i) {
         return {
             title       : post.meta.title,
             description : post.html,
@@ -271,7 +286,7 @@ function readBlogSync(opts) {
         entry   : [],
     };
 
-    atomData.entry = posts.map(function(post, i) {
+    atomData.entry = latest.map(function(post, i) {
         return {
             title   : post.meta.title,
             id      : 'http://' + opts.domain + opts.base + '/' + post.name,

@@ -14,25 +14,44 @@ Read a directory of files, get a blog data structure.
 
 # Synopsis #
 
+This will return a data structure of the content from the local `blog` directory (the `dir` option, required). The
+`domain` option is also required so that we can provide full URLs inside the RSS and Atom feeds.
+
 ```
-var blogz = require('blogz');
 var util  = require('util');
+
+var blogz = require('blogz');
+
 var blog  = blogz({
-  contentDir : __dirname + '/blog',
-  domain     : 'www.mysite.com',
-  base       : '/blog'
+    dir    : __dirname + '/blog',
+    domain : 'example.com',
 });
 
 console.log(util.inspect(blog, null, 5));
 ```
 
-# Why is this Module Separate? #
+# Default Options #
 
-Basically because it is useful in a lot of places:
+```
+var defaults = {
+    title       : '',
+    description : '',
+    base        : '',
+    latestCount : 10,
+};
+```
 
-1. Could be used in a static website generator
-2. Used in [connect-blog](http://npm.im/connect-blog)
-3. Future: Used as a plugin for my Proximity project (soon to be renamed and released)
+You may override any of these defaults in the options.
+
+* `title` : used in the RSS and Atom feeds
+* `description` : used in the RSS feed
+* `base` : where the blog will be mounted on the server (e.g. `/blog` or `/misc`). If left blank it defaults to the
+  empty string, which means at the root of the server. Don't add a trailing slash.
+* `latestCount` : the number of posts to store in the `latest` list returned
+
+# Options #
+
+##  ##
 
 # Author #
 
