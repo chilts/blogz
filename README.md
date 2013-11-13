@@ -16,10 +16,14 @@ Read a directory of files, get a blog data structure.
 
 ```
 var blogz = require('blogz');
+var util  = require('util');
+var blog  = blogz({
+  contentDir : __dirname + '/blog',
+  domain     : 'www.mysite.com',
+  base       : '/blog'
+});
 
-var blog = blogz(__dirname + '/blog');
-
-console.log(blog);
+console.log(util.inspect(blog, null, 5));
 ```
 
 # Why is this Module Separate? #
