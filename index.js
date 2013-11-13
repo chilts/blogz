@@ -23,6 +23,7 @@ var data2xml = require('data2xml')({
     attrProp : '@',
     valProp  : '#',
 });
+var debug    = require('debug')('blogz');
 
 // ----------------------------------------------------------------------------
 
@@ -49,12 +50,6 @@ function readBlogSync(opts) {
 
     var now = new Date();
     var nowMoment = moment(now);
-
-    function debug() {
-        if ( opts.debug ) {
-            console.log.apply(undefined, Array.prototype.slice.call(arguments));
-        }
-    }
 
     // read all the files from the content dir
     var files = fs.readdirSync(opts.contentDir);
