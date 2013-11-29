@@ -3,6 +3,7 @@ var test = require('tape').test;
 var blogz = require('../');
 
 var blog = blogz({
+    domain     : 'example.com',
     contentDir : __dirname + '/one-post',
 });
 

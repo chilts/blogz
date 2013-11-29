@@ -26,7 +26,7 @@
     "email": "andychilton@gmail.com"
   },
   "scripts": {
-    "test": "set -e; for FILE in test/*.js; do node $FILE; done"
+    "test": "set -e; for FILE in test/*.js; do echo \"=== $FILE ===\"; node $FILE; done"
   },
   "author": {
     "name": "Andrew Chilton",

@@ -165,7 +165,7 @@ function readBlogSync(opts) {
         return post[name];
     });
 
-    debug('Found ' + posts.length + ' posts');
+    debug('Total posts = ' + posts.length);
 
     // convert and create all the times for all the posts
     posts.forEach(function(post) {
@@ -182,8 +182,6 @@ function readBlogSync(opts) {
         post.meta.moment = dtMoment;
     });
 
-    debug('Found ' + posts.length + ' posts');
-
     // sort the posts by chronological order
     posts = posts.filter(function(post) {
         // only return blog posts that have passed their 'date' (ie. published)
@@ -197,7 +195,7 @@ function readBlogSync(opts) {
         return 0;
     });
 
-    debug('Found ' + posts.length + ' posts');
+    debug('Filtered down to ' + posts.length + ' posts');
 
     // make sure each post has a prev and next
     posts.forEach(function(post, i) {
@@ -209,8 +207,6 @@ function readBlogSync(opts) {
         }
     });
 
-    debug('Found ' + posts.length + ' posts');
-
     // get a copy of all the posts but reversed
     reverse = posts.slice(0);
     reverse.reverse();
@@ -219,6 +215,14 @@ function readBlogSync(opts) {
     latest = reverse.slice(0, opts.latestCount);
 
     // ToDo: make the index pages ... !
+    var runningTotal = 0;
+    while ( runningTotal < posts.length ) {
+        // add this page
+        pages.push(posts.slice(runningTotal, opts.indexCount));
+
+        // increment running total to the next page
+        runningTotal += opts.indexCount;
+    }
 
     // make the archive
     posts.forEach(function(post) {
@@ -310,6 +314,11 @@ function readBlogSync(opts) {
     });
 
     atomXml = data2xml('feed', atomData);
+
+    debug('Blogz Summary');
+    debug('* posts  = ' + posts.length);
+    debug('* latest = ' + latest.length);
+    debug('* pages  = ' + pages.length);
 
     return {
         posts   : posts,
