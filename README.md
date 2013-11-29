@@ -18,8 +18,6 @@ This will return a data structure of the content from the local `blog` directory
 `domain` option is also required so that we can provide full URLs inside the RSS and Atom feeds.
 
 ```
-var util  = require('util');
-
 var blogz = require('blogz');
 
 var blog  = blogz({
@@ -27,7 +25,14 @@ var blog  = blogz({
     domain : 'example.com',
 });
 
-console.log(util.inspect(blog, null, 5));
+console.log(blog);
+```
+
+If you want to see all levels in the returned data structure, do this:
+
+```
+var util = require('util');
+console.log(util.inspect(blog, { depth : null }));
 ```
 
 # Default Options #
