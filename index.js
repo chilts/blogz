@@ -219,6 +219,7 @@ function readBlogSync(opts) {
     while ( runningTotal < posts.length ) {
         // add this page
         pages.push(posts.slice(runningTotal, opts.indexCount));
+        pages[pages.length-1].reverse();
 
         // increment running total to the next page
         runningTotal += opts.indexCount;
