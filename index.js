@@ -57,12 +57,13 @@ function readBlogSync(opts) {
     opts = xtend({}, defaults, opts);
 
     // set up some vars we're going to use
-    var post    = {};
-    var posts   = [];
+    var post     = {};
+    var posts    = [];
     var reverse;
-    var pages   = [];
-    var archive = {};
-    var tagged  = {};
+    var pages    = [];
+    var archive  = {};
+    var tag      = {};
+    var category = {};
     var rssXml;
     var atomXml;
 
@@ -110,6 +111,7 @@ function readBlogSync(opts) {
                 month     : nowMoment.format('MM'),
                 day       : nowMoment.format('DD'),
                 monthname : nowMoment.format('MMMM'),
+                category  : 'general',
                 tags    : [],
             },
             content : '',
@@ -240,10 +242,16 @@ function readBlogSync(opts) {
 
     // keep a list of all the tagged
     posts.forEach(function(post) {
-        post.meta.tags.forEach(function(tag) {
-            tagged[tag] = tagged[tag] || [];
-            tagged[tag].push(post);
+        post.meta.tags.forEach(function(tagName) {
+            tag[tagName] = tag[tagName] || [];
+            tag[tagName].push(post);
         });
+    });
+
+    // keep a list of all the categories
+    posts.forEach(function(post) {
+        category[post.meta.category] = category[post.meta.category] || [];
+        category[post.meta.category].push(post);
     });
 
     // make the rss20.xml feed - firstly, make the RSS feed
@@ -316,20 +324,23 @@ function readBlogSync(opts) {
 
     atomXml = data2xml('feed', atomData);
 
-    debug('Blogz Summary');
-    debug('* posts  = ' + posts.length);
-    debug('* latest = ' + latest.length);
-    debug('* pages  = ' + pages.length);
+    debug('Blogz Summary:');
+    debug('* posts    = ' + posts.length);
+    debug('* latest   = ' + latest.length);
+    debug('* pages    = ' + pages.length);
+    debug('* tag      = ' + Object.keys(tag).length);
+    debug('* category = ' + Object.keys(category).length);
 
     return {
-        posts   : posts,
-        post    : post,
-        pages   : pages,
-        latest  : latest,
-        archive : archive,
-        tagged  : tagged,
-        rss     : rssXml,
-        atom    : atomXml,
+        posts    : posts,
+        post     : post,
+        pages    : pages,
+        latest   : latest,
+        archive  : archive,
+        tag      : tag,
+        category : category,
+        rss      : rssXml,
+        atom     : atomXml,
     };
 }
 
