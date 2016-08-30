@@ -43,6 +43,8 @@ var defaults = {
     description : '',
     base        : '',
     latestCount : 10,
+    authorName  : '',
+    authorEmail : '',
 };
 ```
 
@@ -53,6 +55,8 @@ You may override any of these defaults in the options.
 * `base` : where the blog will be mounted on the server (e.g. `/blog` or `/misc`). If left blank it defaults to the
   empty string, which means at the root of the server. Don't add a trailing slash.
 * `latestCount` : the number of posts to store in the `latest` list returned
+* `authorName` : used in the Atom feed
+* `authorEmail` : used in the Atom feed
 
 # Options #
 

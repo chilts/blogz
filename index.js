@@ -285,8 +285,8 @@ function readBlogSync(opts) {
         updated : moment().format(),
         id      : 'http://' + opts.domain + '/',
         author  : {
-            name  : 'Andrew Chilton',
-            email : 'andychilton@gmail.com',
+            name  : opts.authorName,
+            email : opts.authorEmail,
         },
         entry   : [],
     };
