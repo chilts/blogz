@@ -1,7 +1,7 @@
 {
   "name": "blogz",
   "description": "Read a directory of files, get a blog data structure.",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "scripts": {
     "test": "set -e; for FILE in test/*.js; do echo \"=== $FILE ===\"; node $FILE; done"
   },
