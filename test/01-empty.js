@@ -22,6 +22,7 @@ test(function(t) {
       version       : 'https://jsonfeed.org/version/1',
       title         : 'Empty Blog',
       home_page_url : 'http://example.com',
+      feed_url      : 'http://example.com/feed.json',
       description   : '',
       items         : [],
     };

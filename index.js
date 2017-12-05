@@ -330,17 +330,18 @@ function readBlogSync(opts) {
         version       : "https://jsonfeed.org/version/1",
         title         : opts.title,
         home_page_url : "http://" + opts.domain + opts.base,
+        feed_url      : "http://" + opts.domain + opts.base + '/feed.json',
         description   : opts.description,
         items         : [], // empty for now
     }
 
     feedJson.items = latest.map(function(post, i) {
         return {
-            title        : post.meta.title,
-            content_html : post.html,
-            url          : 'http://' + opts.domain + opts.base + '/' + post.name,
-            guid         : 'http://' + opts.domain + opts.base + '/' + post.name,
-            pubDate      : post.meta.moment.format("YYYY-MM-DDTHH:mm:ssZ"),
+            id             : 'http://' + opts.domain + opts.base + '/' + post.name,
+            title          : post.meta.title,
+            content_html   : post.html,
+            url            : 'http://' + opts.domain + opts.base + '/' + post.name,
+            date_published : post.meta.moment.format("YYYY-MM-DDTHH:mm:ssZ"),
         };
     });
 

@@ -26,14 +26,15 @@ test(function(t) {
         version       : 'https://jsonfeed.org/version/1',
         title         : 'Just One Post',
         home_page_url : 'http://example.com',
+        feed_url      : 'http://example.com/feed.json',
         description   : '',
         items         : [
             {
-                title        : 'First Post',
-                content_html : '<p>Hello, World!</p>\n',
-                url          : 'http://example.com/first-post',
-                guid         : 'http://example.com/first-post',
-                pubDate      : '2013-11-11T11:05:56+13:00',
+                id             : 'http://example.com/first-post',
+                title          : 'First Post',
+                content_html   : '<p>Hello, World!</p>\n',
+                url            : 'http://example.com/first-post',
+                date_published : '2013-11-11T11:05:56+13:00',
             },
         ],
     };

@@ -29,33 +29,33 @@ test(function(t) {
     t.equal(Object.keys(blog.category['cat-five']).length, 1, 'There is one item in this category');
     t.equal(Object.keys(blog.category['general']).length, 2, 'There are two items in the general category');
 
-  // { version: 'https://jsonfeed.org/version/1', title: '', home_page_url: 'http://example.com', description: '', items: [ { title: 'Third Post', content_html: '<p>The final post.</p>\n', url: 'http://example.com/third-post', guid: 'http://example.com/third-post', pubDate: '2015-12-11T11:05:56+13:00' }, { title: 'Second Post', content_html: '<p>So long and thanks for all the fish.</p>\n', url: 'http://example.com/second-post', guid: 'http://example.com/second-post', pubDate: '2015-11-11T11:05:56+13:00' }, { title: 'First Post', content_html: '<p>Hello, World!</p>\n', url: 'http://example.com/first-post', guid: 'http://example.com/first-post', pubDate: '2013-11-11T11:05:56+13:00' } ] }
     let json = {
         version       : 'https://jsonfeed.org/version/1',
         title         : 'A Few Posts',
         home_page_url : 'http://example.com',
+        feed_url      : 'http://example.com/feed.json',
         description   : 'The Description',
         items         : [
           {
+            id: 'http://example.com/third-post',
             title: 'Third Post',
             content_html: '<p>The final post.</p>\n',
             url: 'http://example.com/third-post',
-            guid: 'http://example.com/third-post',
-            pubDate: '2015-12-11T11:05:56+13:00',
+            date_published: '2015-12-11T11:05:56+13:00',
           },
           {
+            id: 'http://example.com/second-post',
             title: 'Second Post',
             content_html: '<p>So long and thanks for all the fish.</p>\n',
             url: 'http://example.com/second-post',
-            guid: 'http://example.com/second-post',
-            pubDate: '2015-11-11T11:05:56+13:00',
+            date_published: '2015-11-11T11:05:56+13:00',
           },
           {
+            id: 'http://example.com/first-post',
             title: 'First Post',
             content_html: '<p>Hello, World!</p>\n',
             url: 'http://example.com/first-post',
-            guid: 'http://example.com/first-post',
-            pubDate: '2013-11-11T11:05:56+13:00',
+            date_published: '2013-11-11T11:05:56+13:00',
           },
         ],
     };
