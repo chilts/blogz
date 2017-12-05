@@ -334,7 +334,7 @@ function readBlogSync(opts) {
     feedJson = {
         version       : "https://jsonfeed.org/version/1",
         title         : opts.title,
-        home_page_url : opts.protocol + '://' + opts.domain + opts.base,
+        home_page_url : opts.protocol + '://' + opts.domain + opts.base + '/',
         feed_url      : opts.protocol + '://' + opts.domain + opts.base + '/feed.json',
         description   : opts.description,
         items         : [], // empty for now

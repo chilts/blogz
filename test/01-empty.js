@@ -21,7 +21,7 @@ test(function(t) {
     let json = {
       version       : 'https://jsonfeed.org/version/1',
       title         : 'Empty Blog',
-      home_page_url : 'https://example.com',
+      home_page_url : 'https://example.com/',
       feed_url      : 'https://example.com/feed.json',
       description   : '',
       items         : [],
