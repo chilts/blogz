@@ -16,7 +16,6 @@ var xtend    = require('xtend');
 var ini      = require('ini');
 var yaml     = require('js-yaml');
 var marked   = require('marked');
-var textile  = require('textile-js');
 var escape   = require('escape-html');
 var moment   = require('moment');
 var data2xml = require('data2xml')({
@@ -38,7 +37,6 @@ var defaults = {
 
 var validExt = {
     md      : true,
-    textile : true,
     txt     : true,
     html    : true,
     json    : true,
@@ -92,7 +90,7 @@ function readBlogSync(opts) {
         var ext = parts[1];
         var date, dateMoment;
 
-        // ignore any files that are not *.{md,textile,txt,html,json,yaml,ini}
+        // ignore any files that are not *.{md,txt,html,json,yaml,ini}
         if ( !validExt[ext] ) {
             // ignoring this file
             return;
@@ -157,10 +155,6 @@ function readBlogSync(opts) {
         if ( ext === 'md' ) {
             post[basename].content = contents;
             post[basename].html    = marked(contents);
-        }
-        if ( ext === 'textile' ) {
-            post[basename].content = contents;
-            post[basename].html    = textile(contents);
         }
         if ( ext === 'text' ) {
             post[basename].content = contents;

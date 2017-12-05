@@ -22,7 +22,6 @@
     "js-yaml": "^3.10.0",
     "marked": "^0.3.7",
     "moment": "^2.19.3",
-    "textile-js": "~2.0.1",
     "xtend": "~4.0.1"
   },
   "devDependencies": {
