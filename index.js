@@ -66,6 +66,7 @@ function readBlogSync(opts) {
     var category = {};
     var rssXml;
     var atomXml;
+    var feedJson;
 
     var now = new Date();
     var nowMoment = moment(now);
@@ -324,6 +325,25 @@ function readBlogSync(opts) {
 
     atomXml = data2xml('feed', atomData);
 
+    // make the feed.json
+    feedJson = {
+        version       : "https://jsonfeed.org/version/1",
+        title         : opts.title,
+        home_page_url : "http://" + opts.domain + opts.base,
+        description   : opts.description,
+        items         : [], // empty for now
+    }
+
+    feedJson.items = latest.map(function(post, i) {
+        return {
+            title        : post.meta.title,
+            content_html : post.html,
+            url          : 'http://' + opts.domain + opts.base + '/' + post.name,
+            guid         : 'http://' + opts.domain + opts.base + '/' + post.name,
+            pubDate      : post.meta.moment.format("YYYY-MM-DDTHH:mm:ssZ"),
+        };
+    });
+
     debug('Blogz Summary:');
     debug('* posts    = ' + posts.length);
     debug('* latest   = ' + latest.length);
@@ -341,6 +361,7 @@ function readBlogSync(opts) {
         category : category,
         rss      : rssXml,
         atom     : atomXml,
+        json     : feedJson,
     };
 }
 
