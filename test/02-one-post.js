@@ -25,15 +25,15 @@ test(function(t) {
     let json = {
         version       : 'https://jsonfeed.org/version/1',
         title         : 'Just One Post',
-        home_page_url : 'http://example.com',
-        feed_url      : 'http://example.com/feed.json',
+        home_page_url : 'https://example.com',
+        feed_url      : 'https://example.com/feed.json',
         description   : '',
         items         : [
             {
-                id             : 'http://example.com/first-post',
+                id             : 'https://example.com/first-post',
                 title          : 'First Post',
                 content_html   : '<p>Hello, World!</p>\n',
-                url            : 'http://example.com/first-post',
+                url            : 'https://example.com/first-post',
                 date_published : '2013-11-11T11:05:56+13:00',
             },
         ],

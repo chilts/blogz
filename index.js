@@ -28,6 +28,7 @@ var debug    = require('debug')('blogz');
 // ----------------------------------------------------------------------------
 
 var defaults = {
+    protocol    : 'https',
     title       : '',
     description : '',
     base        : '',
@@ -55,6 +56,10 @@ function readBlogSync(opts) {
 
     // set some defaults
     opts = xtend({}, defaults, opts);
+
+    if ( opts.protocol !== 'http' && opts.protocol !== 'https' ) {
+        throw new Error("Invalid option 'protocol' - should be 'https' or 'http'");
+    }
 
     // set up some vars we're going to use
     var post     = {};
@@ -261,7 +266,7 @@ function readBlogSync(opts) {
         channel : {
             title         : opts.title,
             description   : opts.description,
-            link          : 'http://' + opts.domain + opts.base + '/rss20.xml',
+            link          : opts.protocol + '://' + opts.domain + opts.base + '/rss20.xml',
             lastBuildDate : nowMoment.format("ddd, DD MMM YYYY HH:mm:ss ZZ"),
             pubDate       : nowMoment.format("ddd, DD MMM YYYY HH:mm:ss ZZ"),
             ttl           : 1800,
@@ -273,8 +278,8 @@ function readBlogSync(opts) {
         return {
             title       : post.meta.title,
             description : post.html,
-            link        : 'http://' + opts.domain + opts.base + '/' + post.name,
-            guid        : 'http://' + opts.domain + opts.base + '/' + post.name,
+            link        : opts.protocol + '://' + opts.domain + opts.base + '/' + post.name,
+            guid        : opts.protocol + '://' + opts.domain + opts.base + '/' + post.name,
             pubDate     : post.meta.moment.format("ddd, DD MMM YYYY HH:mm:ss ZZ"),
         };
     });
@@ -287,12 +292,12 @@ function readBlogSync(opts) {
         title   : opts.title,
         link    : {
             '@' : {
-                href : 'http://' + opts.domain + opts.base + '/atom.xml',
+                href : opts.protocol + '://' + opts.domain + opts.base + '/atom.xml',
                 rel  : 'self',
             },
         },
         updated : moment().format(),
-        id      : 'http://' + opts.domain + '/',
+        id      : opts.protocol + '://' + opts.domain + '/',
         author  : {
             name  : opts.authorName,
             email : opts.authorEmail,
@@ -303,14 +308,14 @@ function readBlogSync(opts) {
     atomData.entry = latest.map(function(post, i) {
         return {
             title   : post.meta.title,
-            id      : 'http://' + opts.domain + opts.base + '/' + post.name,
+            id      : opts.protocol + '://' + opts.domain + opts.base + '/' + post.name,
             link    : [
                 {
-                    '@' : { href : 'http://' + opts.domain + opts.base + '/' + post.name }
+                    '@' : { href : opts.protocol + '://' + opts.domain + opts.base + '/' + post.name }
                 },
                 {
                     '@' : {
-                        href : 'http://' + opts.domain + opts.base + '/' + post.name,
+                        href : opts.protocol + '://' + opts.domain + opts.base + '/' + post.name,
                         rel : 'self'
                     }
                 }
@@ -329,18 +334,18 @@ function readBlogSync(opts) {
     feedJson = {
         version       : "https://jsonfeed.org/version/1",
         title         : opts.title,
-        home_page_url : "http://" + opts.domain + opts.base,
-        feed_url      : "http://" + opts.domain + opts.base + '/feed.json',
+        home_page_url : opts.protocol + '://' + opts.domain + opts.base,
+        feed_url      : opts.protocol + '://' + opts.domain + opts.base + '/feed.json',
         description   : opts.description,
         items         : [], // empty for now
     }
 
     feedJson.items = latest.map(function(post, i) {
         return {
-            id             : 'http://' + opts.domain + opts.base + '/' + post.name,
+            id             : opts.protocol + '://' + opts.domain + opts.base + '/' + post.name,
             title          : post.meta.title,
             content_html   : post.html,
-            url            : 'http://' + opts.domain + opts.base + '/' + post.name,
+            url            : opts.protocol + '://' + opts.domain + opts.base + '/' + post.name,
             date_published : post.meta.moment.format("YYYY-MM-DDTHH:mm:ssZ"),
         };
     });
