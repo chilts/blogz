@@ -67,6 +67,11 @@ function readBlogSync(opts) {
     var archive  = {};
     var tag      = {};
     var category = {};
+    // save the default Author info
+    var author = {
+        name  : opts.authorName,
+        email : opts.authorEmail,
+    }
     var rssXml;
     var atomXml;
     var feedJson;
@@ -359,6 +364,7 @@ function readBlogSync(opts) {
         archive  : archive,
         tag      : tag,
         category : category,
+        author   : author,
         rss      : rssXml,
         atom     : atomXml,
         json     : feedJson,

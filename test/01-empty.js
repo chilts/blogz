@@ -3,9 +3,11 @@ var test = require('tape').test;
 var blogz = require('../');
 
 var blog = blogz({
-    title      : 'Empty Blog',
-    domain     : 'example.com',
-    contentDir : __dirname + '/empty',
+    title       : 'Empty Blog',
+    domain      : 'example.com',
+    contentDir  : __dirname + '/empty',
+    authorName  : 'Joe Bloggs',
+    authorEmail : 'joe@example.org',
 });
 
 test(function(t) {
@@ -17,6 +19,12 @@ test(function(t) {
     t.equal(Object.keys(blog.archive).length, 0, 'There are no yearly archives');
     t.equal(Object.keys(blog.tag).length, 0, 'There are no tags');
     t.equal(Object.keys(blog.category).length, 0, 'There are no categories');
+
+    const author = {
+      name  : 'Joe Bloggs',
+      email : 'joe@example.org',
+    }
+    t.deepEqual(blog.author, author, 'The author takes the default author options.');
 
     let json = {
       version       : 'https://jsonfeed.org/version/1',
