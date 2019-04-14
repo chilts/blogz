@@ -117,6 +117,7 @@ You may override any of these defaults in the options.
     },
     rss : '...', // The RSS feed for this blog
     atom : '...', // The Atom feed for this blog
+    json : '...', // The JSONFeed for this blog
 }
 ```
 
