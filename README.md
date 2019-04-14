@@ -149,6 +149,6 @@ Written by [Andrew Chilton](https://chilts.org/) - [Twitter](https://twitter.com
 
 # License #
 
-* [Copyright 2013 Andrew Chilton.  All rights reserved.](http://chilts.mit-license.org/2013/)
+* [Copyright 2013-2019 Andrew Chilton.  All rights reserved.](http://chilts.mit-license.org/2013/)
 
 (Ends)
