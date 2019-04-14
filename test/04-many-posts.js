@@ -11,7 +11,7 @@ var blog = blogz({
 test(function(t) {
     t.equal(blog.posts.length, 50, 'There are 50 posts');
     t.equal(Object.keys(blog.post).length, 50, 'There are 50 in post');
-    t.equal(blog.pages.length, 5, 'There is 5 pages page');
+    t.equal(blog.pages.length, 5, 'There are 5 pages in total');
     t.equal(blog.latest.length, 20, 'There are 20 in latest');
 
     t.equal(Object.keys(blog.archive).length, 1, 'There is one yearly archive');

@@ -215,11 +215,10 @@ function readBlogSync(opts) {
     });
 
     // get a copy of all the posts but reversed
-    reverse = posts.slice(0);
-    reverse.reverse();
+    reverse = posts.slice(0).reverse();
 
     // set up an easy way to access the latest posts
-    latest = reverse.slice(0, opts.latestCount);
+    const latest = reverse.slice(0, opts.latestCount);
 
     // ToDo: make the index pages ... !
     var runningTotal = 0;
